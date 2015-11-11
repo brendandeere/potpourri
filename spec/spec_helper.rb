@@ -1,8 +1,13 @@
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'bundler'
-require 'potpourri'
+require 'simplecov'
+SimpleCov.start do
+  add_filter 'spec/'
+  add_filter 'lib/potpourri.rb'
+end
 
-Bundler.require :default, :test
+require 'bundler'
+Bundler.require :default, :development
+
+require 'potpourri'
 
 RSpec.configure do |config|
 
