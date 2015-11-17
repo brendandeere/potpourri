@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   if spec.respond_to?(:metadata)
   end
 
+  spec.add_dependency "activerecord"
   spec.add_development_dependency "bundler", "~> 1.9"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "pry"
