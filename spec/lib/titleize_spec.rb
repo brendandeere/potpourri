@@ -4,9 +4,8 @@ RSpec.describe Potpourri::Titleize do
   let(:test_class) { TestClass.new }
 
   before do
-    TestClass = Struct.new(:foo) do
-      include Potpourri::Titleize
-    end
+    TestClass = Struct.new(:foo)
+    TestClass.prepend described_class
   end
 
   describe '#titleize' do

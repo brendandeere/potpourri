@@ -4,9 +4,8 @@ RSpec.describe Potpourri::ReportConfigs do
   let(:test_class) { TestClass.new }
 
   before do
-    TestClass = Struct.new(:foo) do
-      include Potpourri::ReportConfigs
-    end
+    TestClass = Struct.new(:foo)
+    TestClass.include described_class
   end
 
   describe '.fields' do
