@@ -16,7 +16,7 @@ module Potpourri
 
     def import
       CSV.read(path, headers: true, converters: :numeric).map do |row|
-        resource = resource_class.new
+        resource = fetch_resource(row)
 
         importable_fields.each do |field|
           field.import resource, row[field.header]
@@ -46,6 +46,10 @@ module Potpourri
 
     def exportable_fields
       fields.select &:exportable?
+    end
+
+    def fetch_resource(row)
+      resource_class.new
     end
   end
 end
