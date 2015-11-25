@@ -172,6 +172,7 @@ describe Potpourri::ActiveRecordExtension do
         end
 
         it { is_expected.to have_attributes(name: name) }
+        it { is_expected.to_not have_attributes(id: 99) }
       end
     end
   end

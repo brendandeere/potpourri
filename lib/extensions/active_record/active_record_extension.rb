@@ -34,7 +34,7 @@ module Potpourri
       return find_record(row) unless can_create_new_records?
       return resource_class.new unless can_update_existing_records?
 
-      resource = resource_class.find_or_initialize_by id_params(row)
+      resource = resource_class.find_by(id_params row) || resource_class.new
     end
 
     def find_record(row)
