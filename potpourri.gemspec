@@ -6,11 +6,11 @@ require 'potpourri/version'
 Gem::Specification.new do |spec|
   spec.name          = "potpourri"
   spec.version       = Potpourri::VERSION
-  spec.authors       = ["deereb"]
+  spec.authors       = ["brendandeere"]
   spec.email         = ["brendan.g.deere@gmail.com"]
 
   spec.summary       = %q{Because you're tired of writting csv importer and exporters.}
-  spec.description   = %q{A simple DSL to structure CSV importer and exporters for all of your models.}
+  spec.description   = %q{A simple DSL to structure CSV importer and exporter for all of your models.}
   spec.homepage      = "https://github.com/brendandeere/potpourri"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
@@ -19,9 +19,14 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "http://mygemserver.com"
   end
 
+  spec.add_development_dependency "activerecord"
+  spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "bundler", "~> 1.9"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "pry"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "database_cleaner"
 end
