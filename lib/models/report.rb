@@ -3,6 +3,7 @@ require 'csv'
 module Potpourri
   class Report
     include ReportConfigs
+    include FieldHelpers
 
     attr_reader :path
 
