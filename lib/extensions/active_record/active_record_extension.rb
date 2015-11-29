@@ -3,6 +3,7 @@ module Potpourri
     def self.included(mod)
       raise NotAReport unless mod.ancestors.include?(Report)
       mod.extend ClassMethods
+      mod.include ActiveRecord::FieldHelpers
     end
 
     class MissingIdentifierField < StandardError; end
@@ -15,7 +16,6 @@ module Potpourri
     def can_create_new_records?
       self.class.instance_variable_get '@can_create_new_records'
     end
-
 
     def identifier_field
       fields.detect &:identifier?
