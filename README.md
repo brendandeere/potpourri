@@ -34,9 +34,9 @@ class StarshipReport < Potpourri::Report
   resource_class Starship
 
   fields [
-    Potpourri::Field(:captain),
-    Potpourri::ExportableField(:registration_number),
-    Potpourri::ImportableField(:shield_frequency)
+    field(:captain),
+    export_field(:registration_number),
+    import_field(:shield_frequency)
   ]
 end
 ```
@@ -63,9 +63,9 @@ report.import # => An array of Starship objects
 Fields can be customized in a number of ways. It is easy to decide what fields will be imported and which are
 exported. Extra fields in an import will simply be ignored, so all generated exports are able to be imported.
 
-- Potpourri::Field           => These fields will be both imported and exported
-- Potpourri::ExportableField => These fields will only be exported
-- Potpourri::ImportableField => These fields will only be imported
+- field        => These fields will be both imported and exported
+- export_field => These fields will only be exported
+- import_field => These fields will only be imported
 
 Fields will interpolate which methods are used to get and set values on a model. They will also use a
 variation of the Rails `#titleize` method to generate a header for the csv.
@@ -75,15 +75,8 @@ variation of the Rails `#titleize` method to generate a header for the csv.
 These assumptions can be easily overriden by passing some options into the Field when the report is defined.
 
 ```ruby
-  fields [
-    Potpourri::Field(:registration_number),
-    Potpourri::Field(:captain),
-    Potpourri::ImportableField(:shield_frequency)
-  ]
-...
-
 fields [
-    Potpourri::Field(
+    field(
       :captain,
       export_method: :command_officer,
       import_method: :fearless_leader=,
@@ -91,19 +84,20 @@ fields [
     )
 ]
 
-...
-
 ```
 The importable and exportable fields also respond to the same methods, however of course they will only be either importable or exportable.
 
 ### ActiveRecord Extension
 
 Importing and exporting dynamic models is only so useful. Enter the ActiveRecord extension. It provides a
-`Potpourri::ActiveRecord::Report` class. This class is a subclass of `Potpourri::Report` so it responds in
-much the same way, with some bells and whistles.
+`Potpourri::ActiveRecordExtention` module. This module includes a new field to indicate which column references
+the unique identifier for the object, and controls the logic for creating and updating records during an
+import.
 
 ```ruby
-class StarshipReport < Potpourri::ActiveRecord::Report
+class StarshipReport < Potpourri::Report
+  include Potpourri::ActiveRecordExtension
+
   resource_class Starship
 
   fields [
