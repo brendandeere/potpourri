@@ -1,10 +1,6 @@
 module Potpourri
   module ActiveRecord
-    class IdentifierField < Field
-      def importable?
-        false
-      end
-
+    class IdentifierField < ExportableField
       def identifier?
         true
       end
